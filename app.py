@@ -1,2 +1,7 @@
 
-print("Hello world!")
+def call():
+    print("Hello world!")
+
+
+if __name__ == '__main__':
+    call()
