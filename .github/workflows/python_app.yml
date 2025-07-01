@@ -40,4 +40,6 @@ jobs:
         run: python -m flake8 .
 
       - name: Build rpm-package
-        run: echo "Buld rpm package"
+        run: |
+          sudo apt update
+          sudo apt install -y rpm
