@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 
 def call():
     print("Hello world!")

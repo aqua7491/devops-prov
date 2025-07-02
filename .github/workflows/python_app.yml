@@ -39,14 +39,15 @@ jobs:
       - name: Linting with flake8
         run: python -m flake8 .
 
-      - name: install RPM
+      - name: Preparing the packages
         run: |
-          sudo apt update
-          sudo apt install -y rpm
-      
+          sudo chmod +x app.py
+          mkdir -p build/myapp
+          cp app.py build/myapp/
+          dpkg-deb --build build myapp.deb
+
       - name: Download artifacts
-        run: echo hello > artifact.txt
-      - uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v4
         with:
           name: New Artifact
-          path: artifact.txt
+          path: myapp.deb
