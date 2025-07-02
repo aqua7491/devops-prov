@@ -1,0 +1,10 @@
+#!/usr/bin/make -f
+%:
+	dh $@
+override_dh_auto_install:
+	install -D -m 0755 app.py $(DESTDIR)/tmp/myapp
+
+override_dh_builddeb:
+	dh_builddeb
+	@echo "✅ DEB package created:"
+	@find .. -maxdepth 1 -name '*.deb'

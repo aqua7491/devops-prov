@@ -41,16 +41,18 @@ jobs:
 
       - name: Preparing the packages
         run: |
+          sudo apt install devscripts dh-python debhelper build-essential
           sudo chmod +x app.py
           mkdir -p myapp-1.0
           cp app.py myapp-1.0/
           cp -r debian myapp-1.0/
           ls -alR myapp-1.0/
-          tree myapp-1.0/
           dpkg-buildpackage -us -uc
+          tree .
+          cp ../myapp_1.0-1_all.deb .
 
       - name: Download artifacts
         uses: actions/upload-artifact@v4
         with:
           name: New Artifact
-          path: myapp-*.deb
+          path: myapp_1.0-1_all.deb
