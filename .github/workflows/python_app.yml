@@ -44,8 +44,9 @@ jobs:
           sudo chmod +x app.py
           mkdir -p myapp-1.0
           cp app.py myapp-1.0/
-          cp -r debian/ myapp-1.0/
+          cp -r debian myapp-1.0/
           ls -alR myapp-1.0/
+          tree myapp-1.0/
           dpkg-buildpackage -us -uc
 
       - name: Download artifacts
