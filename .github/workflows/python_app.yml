@@ -42,12 +42,14 @@ jobs:
       - name: Preparing the packages
         run: |
           sudo chmod +x app.py
-          mkdir -p build/myapp
-          cp app.py build/myapp/
-          dpkg-deb --build build myapp.deb
+          mkdir -p myapp-1.0
+          cp app.py myapp-1.0/
+          cp -r debian/ myapp-1.0/
+          ls -alR myapp-1.0/
+          dpkg-buildpackage -us -uc
 
       - name: Download artifacts
         uses: actions/upload-artifact@v4
         with:
           name: New Artifact
-          path: myapp.deb
+          path: myapp-*.deb

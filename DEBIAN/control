@@ -1,0 +1,9 @@
+Source: myapp
+Section: utils
+Priority: optional
+Maintainer: You <you@example.com>
+Standards-Version: 4.6.0
+Package: myapp
+Architecture: all
+Depends: python3
+Description: Minimal Python script packaged with dpkg-buildpackage
