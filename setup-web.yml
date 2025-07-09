@@ -1,0 +1,5 @@
+- name: Setting up webservers
+  hosts: webservers
+  tasks:
+  - name: Ping available hosts
+    ping:
