@@ -1,0 +1,37 @@
+- name: Update and upgrade apt
+  ansible.builtin.apt:
+    update_cache: true
+    cache_valid_time: 3600
+    upgrade: dist
+
+- name: "Install Nginx to version {{ nginx_version }}"
+  ansible.builtin.apt:
+    name: "nginx={{ nginx_version }}"
+    state: present
+
+- name: Copy Nginx config to host
+  template:
+    src: templates/nginx.conf.j2
+    dest: /etc/nginx/sites-available/default
+
+- name: Creating link to new config file
+  file:
+    src: /etc/nginx/sites-available/default
+    dest: /etc/nginx/sites-enabled/default
+    state: link
+
+- name: Create NginX directory
+  ansible.builtin.file:
+    path: "{{ nginx_custom_dir }}"
+    state: directory
+
+- name: Copy index.html to Nginx directory
+  copy: 
+    src: files/index.html
+    dest: "{{ nginx_custom_dir }}/index.html"
+  
+- name: Restart NginX
+  service:
+    name: nginx
+    state: restarted
+

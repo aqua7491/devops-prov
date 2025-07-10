@@ -1,6 +1,9 @@
 
 - name: Setting up webservers
   hosts: webservers
+  become: true
+  roles: 
+    - nginx_setup
   tasks:
   - name: Ping available hosts
     ping:
@@ -9,18 +12,3 @@
     become: yes
     user: 
       name: webadmin
-
-  - name: Update apt-get repo and cache
-    become: yes
-    apt: update_cache=yes force_apt_get=yes cache_valid_time=3600
-
-  - name: install nginx
-    become: yes
-    apt: 
-      name: nginx
-      state: latest
-  - name: start nginx
-    become: yes
-    service: 
-      name: nginx
-      state: started
